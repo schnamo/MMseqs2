@@ -54,6 +54,7 @@ Prefiltering::Prefiltering(const std::string &queryDB,
     sameQTDB = isSameQTDB();
 
     // init the substitution matrices
+
     switch (querySeqType & 0x7FFFFFFF) {
         case Parameters::DBTYPE_NUCLEOTIDES:
             kmerSubMat = getSubstitutionMatrix(scoringMatrixFile, par.alphabetSize, 1.0, false, true);

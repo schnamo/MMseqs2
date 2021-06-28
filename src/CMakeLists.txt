@@ -253,3 +253,6 @@ if (NOT FRAMEWORK_ONLY)
         add_subdirectory(test)
     endif ()
 endif ()
+
+find_package(frugally-deep CONFIG REQUIRED)
+target_link_libraries(mmseqs-framework frugally-deep::fdeep)

@@ -105,6 +105,7 @@ void KmerGenerator::initDataStructure(){
 
 
 std::pair<size_t *, size_t> KmerGenerator::generateKmerList(const unsigned char * int_seq, bool addIdentity){
+
     int dividerBefore=0;
     // pre compute phase
     // find first threshold
@@ -123,6 +124,7 @@ std::pair<size_t *, size_t> KmerGenerator::generateKmerList(const unsigned char 
         dividerBefore+=divider;
 
     }
+
     for(size_t i = this->divideStepCount -1; i >= 1 ; i--){
         this->possibleRest[i-1] = this->highestScorePerArray[i] + possibleRest[i];
     }

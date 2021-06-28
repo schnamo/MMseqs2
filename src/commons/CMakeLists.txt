@@ -40,6 +40,7 @@ set(commons_header_files
         commons/Timer.h
         commons/UniprotKB.h
         commons/Util.h
+        commons/SequenceToProfile.h
         PARENT_SCOPE
         )
 
@@ -71,5 +72,6 @@ set(commons_source_files
         commons/tantan.cpp
         commons/UniprotKB.cpp
         commons/Util.cpp
+        commons/SequenceToProfile.cpp
         PARENT_SCOPE
         )

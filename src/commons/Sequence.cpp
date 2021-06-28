@@ -203,7 +203,7 @@ void Sequence::mapSequence(size_t id, unsigned int dbKey, const char *sequence, 
     this->seqData = sequence;
 
     // for testing purposes only
-//    mapProfileKeras(sequence, mapProfileScores, seqLen);
+    mapProfileKeras(sequence, mapProfileScores, seqLen);
 
     if (Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_AMINO_ACIDS) || Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_NUCLEOTIDES)) {
         mapSequence(sequence, seqLen);

@@ -11,10 +11,13 @@
 
 #include "simd.h"
 
+// fake db type to use the profile generated here:
+// awk 'BEGIN { printf("%c%c%c%c",2,0,0,0); exit; }' > QUERY.dbtype
+
 // todo: error handling
 // todo: run in parallel
-
-SequenceToProfile::SequenceToProfile(int seqType, size_t maxLen)  :   model(fdeep::load_model("/Users/charlotte/NN/fdeep_model.json")) {
+// turned off logger with ", true, fdeep::dev_null_logger", remove that part to turn logger back on
+SequenceToProfile::SequenceToProfile(int seqType, size_t maxLen)  :   model(fdeep::load_model("/Users/charlotte/NN/fdeep_model.json", true, fdeep::dev_null_logger)) {
 
     this->seqType = seqType;
 
@@ -27,7 +30,7 @@ SequenceToProfile::SequenceToProfile(int seqType, size_t maxLen)  :   model(fdee
 
 SequenceToProfile::~SequenceToProfile() {
 
-    free(this->profile);
+//    free(this->profile);
 
 }
 
@@ -39,8 +42,8 @@ void SequenceToProfile::sequenceToProfile(const char *seq, unsigned int L) {
     fkmer.clear();
 
 //    fdeep::model model = fdeep::load_model("/Users/charlotte/NN/fdeep_model.json");
-    std::cout << seq << std::endl;
-    std::cout << L << std::endl;
+//    std::cout << seq << std::endl;
+//    std::cout << L << std::endl;
     for(int i = 0; i < L; i++) {
         fkmer = determineKmer(seq, L, i);
         if(fkmer.size() != kmerSize){

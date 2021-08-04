@@ -241,14 +241,14 @@ size_t QueryMatcher::match(Sequence *seq, float *compositionBias) {
         for (unsigned int kmerPos = 0; kmerPos < kmerElementSize; kmerPos++) {
             const IndexEntryLocal *entries = indexTable->getDBSeqList(index[kmerPos], &seqListSize);
             // DEBUG
-            //std::cout << seq->getDbKey() << std::endl;
-            //idx.printKmer(index[kmerPos], kmerSize, kmerSubMat->num2aa);
-            //std::cout << "\t" << current_i << "\t"<< index[kmerPos] << std::endl;
-            //for (size_t i = 0; i < seqListSize; i++) {
-            //    char diag = entries[i].position_j - current_i;
-            //    std::cout << "(" << entries[i].seqId << " " << (int) diag << ")\t";
-            //}
-            //std::cout << std::endl;
+            std::cout << seq->getDbKey() << std::endl;
+            idx.printKmer(index[kmerPos], kmerSize, kmerSubMat->num2aa);
+            std::cout << "\t" << current_i << "\t"<< index[kmerPos] << std::endl;
+            for (size_t i = 0; i < seqListSize; i++) {
+                char diag = entries[i].position_j - current_i;
+                std::cout << "(" << entries[i].seqId << " " << (int) diag << ")\t";
+            }
+            std::cout << std::endl;
 
             // detected overflow while matching
             if ((sequenceHits + seqListSize) >= lastSequenceHit) {
@@ -352,7 +352,7 @@ std::pair<hit_t*, size_t> QueryMatcher::getResult(CounterResult * results,
         bool aboveThreshold = scoreCurr >= thr;
         bool isNotQueryId = (id != seqIdCurr);
         // write result to list
-        //std::cout << i << "\t" << results[i].id << "\t" << (int)results[i].count << "\t" << results[i].diagonal << std::endl;
+        std::cout << i << "\t" << results[i].id << "\t" << (int)results[i].count << "\t" << results[i].diagonal << std::endl;
         if (aboveThreshold && isNotQueryId) {
             hit_t *result = (resList + currentHits);
             result->seqId = seqIdCurr;

@@ -203,12 +203,13 @@ void Sequence::mapSequence(size_t id, unsigned int dbKey, const char *sequence, 
     this->seqData = sequence;
 
     // for testing purposes only
-    mapProfileKeras(sequence, mapProfileScores, seqLen);
+//    mapProfileKeras(sequence, mapProfileScores, seqLen);
 
     if (Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_AMINO_ACIDS) || Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_NUCLEOTIDES)) {
         mapSequence(sequence, seqLen);
     } else if (Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_HMM_PROFILE)) {
-        mapProfile(sequence, mapProfileScores, seqLen);
+        mapProfileKeras(sequence, mapProfileScores, seqLen);
+//        mapProfile(sequence, mapProfileScores, seqLen);
     } else if (Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_PROFILE_STATE_SEQ)) {
         mapProfileStateSequence(sequence, seqLen);
     }else if (Parameters::isEqualDbtype(this->seqType, Parameters::DBTYPE_PROFILE_STATE_PROFILE)) {
@@ -379,7 +380,7 @@ void Sequence::mapProfileKeras(const char * profileData, bool mapScores, unsigne
     {
         size_t l = 0;
         // I think this should just be the sequence, so no need for currPos?
-        while (data[l] != '\0' && l < maxLen  && l < seqLen){
+        while (data[l] != '\0' && l < maxLen){
 //            for (size_t aa_idx = 0; aa_idx < PROFILE_AA_SIZE; aa_idx++) {
 //                // shift bytes back (avoids NULL byte)
 ////            short value = static_cast<short>( ^ mask);
@@ -395,7 +396,7 @@ void Sequence::mapProfileKeras(const char * profileData, bool mapScores, unsigne
 //                MathUtil::NormalizeTo1(&profile[l * PROFILE_AA_SIZE], PROFILE_AA_SIZE);
 //            }
 //
-            unsigned char queryLetter = data[l];
+            unsigned char queryLetter = subMat->aa2num[data[l]];
 //            // read query sequence
             numSequence[l] = queryLetter; // index 0 is the highest scoring one
 //            unsigned char consensusLetter = data[currPos + PROFILE_AA_SIZE+1];
@@ -428,14 +429,14 @@ void Sequence::mapProfileKeras(const char * profileData, bool mapScores, unsigne
         SequenceToProfile test_stp(0, maxLen);
         test_stp.sequenceToProfile(this->seqData, this->L);
         profile = test_stp.profile;
-        printProfile();
+//        printProfile();
         // this usually happens in the constructor, however, only for profiles but we are doing it here for now
-        this->pNullBuffer           = new float[maxLen + 1];
-        this->neffM                 = new float[maxLen + 1];
-        this->profile_score         = (short *)        mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(short));
-        this->profile_index         = (unsigned int *) mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(int));
-        this->pseudocountsWeight    = (float *)        mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(float));
-        this->profile_for_alignment = (int8_t *)       mem_align(ALIGN_INT, (maxLen + 1) * subMat->alphabetSize * sizeof(int8_t));
+//        this->pNullBuffer           = new float[maxLen + 1];
+//        this->neffM                 = new float[maxLen + 1];
+//        this->profile_score         = (short *)        mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(short));
+//        this->profile_index         = (unsigned int *) mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(int));
+//        this->pseudocountsWeight    = (float *)        mem_align(ALIGN_INT, (maxLen + 1) * PROFILE_ROW_SIZE * sizeof(float));
+//        this->profile_for_alignment = (int8_t *)       mem_align(ALIGN_INT, (maxLen + 1) * subMat->alphabetSize * sizeof(int8_t));
         if (mapScores) {
             for(int l = 0; l < this->L; l++) {
                 //        MathUtil::NormalizeTo1(&profile[l * profile_row_size], PROFILE_AA_SIZE);

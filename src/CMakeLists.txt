@@ -34,6 +34,9 @@ add_library(mmseqs-framework
         ${multihit_source_files}
         ${taxonomy_header_files}
         ${taxonomy_source_files}
+        ###added code
+        ${linclust_header_files}
+        ###
         ${linclust_source_files}
         ${util_header_files}
         ${util_source_files}
@@ -71,8 +74,12 @@ add_dependencies(mmseqs-framework generated)
 append_target_property(mmseqs-framework COMPILE_FLAGS ${MMSEQS_CXX_FLAGS} -pedantic -Wall -Wextra -Wdisabled-optimization)
 append_target_property(mmseqs-framework LINK_FLAGS ${MMSEQS_CXX_FLAGS} -pedantic -Wall -Wextra -Wdisabled-optimization)
 if (NOT EMSCRIPTEN)
-    append_target_property(mmseqs-framework COMPILE_FLAGS -fno-exceptions)
-    append_target_property(mmseqs-framework LINK_FLAGS -fno-exceptions)
+    #append_target_property(mmseqs-framework COMPILE_FLAGS -fno-exceptions)
+    #append_target_property(mmseqs-framework LINK_FLAGS -fno-exceptions)
+
+    #exception allowed
+    append_target_property(mmseqs-framework COMPILE_FLAGS -fexceptions)
+    append_target_property(mmseqs-framework LINK_FLAGS -fexceptions)
 endif()
 
 if (ENABLE_WERROR)

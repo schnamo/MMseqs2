@@ -29,4 +29,5 @@ private:
 };
 
 
+
 #endif //TEST_KERAS_SEQUENCETOPROFILE_H

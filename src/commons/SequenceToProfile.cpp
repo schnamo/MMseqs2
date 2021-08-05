@@ -9,12 +9,13 @@
 #include <vector>
 #include <numeric>
 
+
 #include "simd.h"
 
 // todo: error handling
 // todo: run in parallel
 
-SequenceToProfile::SequenceToProfile(int seqType, size_t maxLen)  :   model(fdeep::load_model("/Users/charlotte/NN/fdeep_model.json")) {
+SequenceToProfile::SequenceToProfile(int seqType, size_t maxLen)  :   model(fdeep::load_model("/Users/doyoung/Downloads/fdeep_model.json")) {
 
     this->seqType = seqType;
 
@@ -71,7 +72,7 @@ void SequenceToProfile::sequenceToProfile(const char *seq, unsigned int L) {
 std::vector<float> SequenceToProfile::determineKmer(const char *seq, unsigned int L, int i){
 
     std::vector<float> fkmer;
-    int padding = 65;
+    int padding = 88; //added code
     int padding_start = 0;
     int padding_end = 0;
     int halfK = (kmerSize - 1) / 2;
